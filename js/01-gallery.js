@@ -21,15 +21,15 @@ galleryItems.forEach((item) => {
   gallery.appendChild(galleryitem);
 });
 
-const galleryLinks = document.querySelectorAll(".lightbox");
+let instance;
 
-galleryLinks.forEach((galleryLink) => {
-  galleryLink.addEventListener("click", function (event) {
-    event.preventDefault();
-    const imageSource = this.href;
-    const instance = basicLightbox.create(`<img src="${imageSource}">`);
+gallery.addEventListener("click", (e) => {
+  e.preventDefault();
+
+  if (e.target.classList.contains("gallery__image")) {
+    instance = basicLightbox.create(`<img src=${e.target.dataset.src}>
+      `);
     instance.show();
-  });
+  }
 });
-
 console.log(galleryItems);
